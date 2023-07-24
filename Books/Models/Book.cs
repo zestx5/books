@@ -28,4 +28,9 @@ public class Book
     {
         return HashCode.Combine(Author, Title, Genre);
     }
+
+    public override string ToString()
+    {
+        return $"{this.Author}, {this.Title}, {this.Genre}, {this.Status}";
+    }
 }

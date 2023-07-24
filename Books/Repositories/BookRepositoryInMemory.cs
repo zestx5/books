@@ -32,10 +32,9 @@ public class BookRepositoryInMemory : IEntityRepository<Book>
         }
         catch
         {
-            return null;
-        };
+            throw new InvalidOperationException();
+        }
     }
-
     public void Update(Book entity)
     {
         throw new NotImplementedException();

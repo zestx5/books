@@ -6,7 +6,7 @@ namespace Books.Tests;
 public class BookRepositoryTests
 {
     readonly BookRepositoryInMemory repository = new();
-    [SetUp]
+    [OneTimeSetUp]
     public void Init()
     {
         var book = new Book("Author", "Title", "Genre", Enums.BookStatus.Dropped);
@@ -24,6 +24,12 @@ public class BookRepositoryTests
     {
         var book = new Book("Author", "Title", "Genre", Enums.BookStatus.Dropped);
         Assert.That(repository.GetById(1), Is.EqualTo(book));
+    }
+
+    [Test]
+    public void GetById_NonExistingId_ShouldThrowInvalidOperationException()
+    {
+        Assert.That(() => repository.GetById(-1), Throws.InvalidOperationException);
     }
 
     [Test]
