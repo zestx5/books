@@ -52,5 +52,9 @@ public class BookRepositoryTests
     [Test]
     public void GetAll_ShouldReturnAllBooks()
     {
+        var book = new Book("Test", "Test", "Test", Enums.BookStatus.Dropped);
+        repository.Add(book);
+        var books = repository.GetAll();
+        Assert.That(books.Count(), Is.EqualTo(2));
     }
 }

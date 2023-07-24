@@ -20,7 +20,7 @@ public class BookRepositoryInMemory : IEntityRepository<Book>
 
     public IEnumerable<Book> GetAll()
     {
-        throw new NotImplementedException();
+        return _bookRepository;
     }
 
     public Book GetById(int id)
