@@ -1,4 +1,6 @@
-﻿namespace Books;
+﻿using Books.Enums;
+
+namespace Books.Models;
 
 public class Book
 {

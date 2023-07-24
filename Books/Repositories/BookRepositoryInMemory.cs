@@ -1,6 +1,8 @@
-﻿namespace Books;
+﻿using Books.Models;
 
-public class BookRepository : IEntityRepository<Book>
+namespace Books.Repositories;
+
+public class BookRepositoryInMemory : IEntityRepository<Book>
 {
     public void Add(Book entity)
     {

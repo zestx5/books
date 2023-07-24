@@ -1,4 +1,4 @@
-﻿namespace Books;
+﻿namespace Books.Repositories;
 
 public interface IEntityRepository<T>
 {

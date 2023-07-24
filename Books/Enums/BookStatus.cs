@@ -1,4 +1,4 @@
-﻿namespace Books;
+﻿namespace Books.Enums;
 
 public enum BookStatus
 {
