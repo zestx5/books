@@ -25,7 +25,15 @@ public class BookRepositoryInMemory : IEntityRepository<Book>
 
     public Book GetById(int id)
     {
-        throw new NotImplementedException();
+        var idx = id - 1;
+        try
+        {
+            return _bookRepository[idx];
+        }
+        catch
+        {
+            return null;
+        };
     }
 
     public void Update(Book entity)

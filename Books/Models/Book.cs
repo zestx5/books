@@ -15,4 +15,17 @@ public class Book
     public string Title { get; set; }
     public string Genre { get; set; }
     public BookStatus Status { get; set; }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is Book book &&
+               Author == book.Author &&
+               Title == book.Title &&
+               Genre == book.Genre;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Author, Title, Genre);
+    }
 }
