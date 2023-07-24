@@ -13,9 +13,9 @@ public class BookRepositoryInMemory : IEntityRepository<Book>
         _bookRepository.Add(entity);
     }
 
-    public void Delete(Book entity)
+    public void DeleteById(int id)
     {
-        throw new NotImplementedException();
+        _bookRepository.RemoveAt(id - 1);
     }
 
     public IEnumerable<Book> GetAll()

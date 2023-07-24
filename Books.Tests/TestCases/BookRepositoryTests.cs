@@ -43,11 +43,14 @@ public class BookRepositoryTests
     [Test]
     public void Delete_ExistingBook_ShouldDeleteFromDatabase()
     {
+        var book = new Book("Test", "Test", "Test", Enums.BookStatus.Dropped);
+        repository.Add(book);
+        repository.DeleteById(2);
+        Assert.That(repository.Count(), Is.EqualTo(1));
     }
 
     [Test]
     public void GetAll_ShouldReturnAllBooks()
     {
     }
-
 }
