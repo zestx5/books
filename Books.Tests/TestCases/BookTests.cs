@@ -1,4 +1,6 @@
-﻿using NUnit.Framework.Internal;
+﻿using Books.Enums;
+using Books.Models;
+using NUnit.Framework.Internal;
 
 namespace Books.Tests;
 
