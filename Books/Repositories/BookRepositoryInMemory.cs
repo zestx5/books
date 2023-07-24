@@ -32,11 +32,19 @@ public class BookRepositoryInMemory : IEntityRepository<Book>
         }
         catch
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("Not found");
         }
     }
-    public void Update(Book entity)
+
+    public void Update(Book entity, int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _bookRepository[id - 1] = entity;
+        }
+        catch
+        {
+            throw new InvalidOperationException("Not found");
+        }
     }
 }

@@ -35,6 +35,9 @@ public class BookRepositoryTests
     [Test]
     public void Update_ExistingBook_ShouldUpdateInDatabase()
     {
+        var book = new Book("Test", "Test", "Test", Enums.BookStatus.Dropped);
+        repository.Update(book, 1);
+        Assert.That(repository.GetById(1), Is.EqualTo(book));
     }
 
     [Test]
