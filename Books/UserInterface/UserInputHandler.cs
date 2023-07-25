@@ -3,10 +3,16 @@ namespace Books.UserInterface;
 
 public static class UserInputHandler
 {
-    public static string? GetStringInput(string prompt)
+    public static string GetStringInput(string prompt)
     {
         Console.WriteLine(prompt);
-        return Console.ReadLine();
+
+        string? output;
+        do
+        {
+            output = Console.ReadLine();
+        } while (string.IsNullOrEmpty(output));
+        return output;
     }
 
     public static int GetIntegerInput(string prompt)

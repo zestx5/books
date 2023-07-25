@@ -1,4 +1,5 @@
-﻿using Books.Models;
+﻿using Books.Enums;
+using Books.Models;
 using Books.Repositories;
 
 namespace Books.Services;
@@ -8,8 +9,6 @@ public class BookService
     private readonly IEntityRepository<Book> _repository;
 
     public BookService(IEntityRepository<Book> repository) => _repository = repository;
-
-    public void CreateBook(Book book) => _repository.Add(book);
 
     public void EditBook(Book book, int id) => _repository.Update(book, id);
 
@@ -33,5 +32,11 @@ public class BookService
         }
 
         return output;
+    }
+
+    internal void CreateBook(string author, string title, string genre, BookStatus status)
+    {
+        var book = new Book(author, title, genre, status);
+        _repository.Add(book);
     }
 }
