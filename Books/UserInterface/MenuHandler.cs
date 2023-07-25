@@ -21,7 +21,7 @@ public class MenuHandler
         Console.WriteLine(menu);
         Console.WriteLine();
 
-        var userSelect = UserInputHandler.GetIntegerInput("Input: ");
+        var userSelect = UserInputHandler.GetIntegerInput("Enter your choice (1-6): ");
         Resolve(userSelect)();
     }
 
@@ -38,7 +38,7 @@ public class MenuHandler
 
     private static void InvalidOption()
     {
-        Console.WriteLine("Wrong input");
+        Console.WriteLine("Invalid input. Please enter a valid number.");
         Start();
     }
 
@@ -68,6 +68,7 @@ public class MenuHandler
 
     private static void Exit()
     {
+        Console.WriteLine("Exiting the application...");
         Environment.Exit(0);
     }
 
