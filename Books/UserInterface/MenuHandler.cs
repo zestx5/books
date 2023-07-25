@@ -1,7 +1,4 @@
-﻿using System.Linq.Expressions;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.InteropServices;
-using Books.Enums;
+﻿using Books.Enums;
 using Books.Models;
 using Books.Repositories;
 using Books.Services;
@@ -84,8 +81,25 @@ public class MenuHandler
 
     private void ChangeStatus()
     {
-        Console.WriteLine("WIP");
-        Start();
+        Console.WriteLine("Select book");
+        var id = UserInputHandler.GetIntegerInput("Enter book id: ");
+        var book = _bookService.GetById(id);
+        if (book != null)
+        {
+            DisplayBookById(id);
+            var status = AskForStatus();
+            book.Status = status;
+            _bookService.EditBook(book, id);
+            Start();
+        }
+        Console.WriteLine("No book");
+        AskExitApp();
+    }
+
+    private void DisplayBookById(int id)
+    {
+        var book = _bookService.GetById(id);
+        Console.WriteLine(book);
     }
 
     private void DeleteBook()

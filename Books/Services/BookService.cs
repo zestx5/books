@@ -14,7 +14,17 @@ public class BookService
 
     public void DeleteBook(int id) => _repository.DeleteById(id);
 
-    public Book DisplayById(int id) => _repository.GetById(id);
+    public Book? GetById(int id)
+    {
+        try
+        {
+            return _repository.GetById(id);
+        }
+        catch (System.Exception)
+        {
+            return null;
+        }
+    }
 
     public string DisplayAllBooks() => CreateBooksView(_repository.GetAll());
 
@@ -26,9 +36,9 @@ public class BookService
             return "No books";
         }
 
-        foreach (var book in books)
+        for (int i = 0; i < books.Count(); i++)
         {
-            output += book.ToString() + "\n";
+            output += $"{i + 1}. " + books.ElementAt(i).ToString() + "\n";
         }
 
         return output;
