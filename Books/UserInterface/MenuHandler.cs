@@ -75,8 +75,63 @@ public class MenuHandler
 
     private void EditBook()
     {
-        Console.WriteLine("WIP");
-        Start();
+        Console.WriteLine("Select book");
+        var id = UserInputHandler.GetIntegerInput("Enter book id: ");
+        var book = _bookService.GetById(id);
+        if (book != null)
+        {
+            book = EditBookMenu(book);
+            _bookService.EditBook(book, id);
+            Start();
+        }
+        Console.WriteLine("No book");
+        AskExitApp();
+    }
+
+    private static Book EditBookMenu(Book book)
+    {
+        var bookInfo = $"""
+        1. {book.Author} - Author
+        2. {book.Title} - Title
+        3. {book.Genre} - Genre
+        4. {book.Status} - Status
+        5. Save
+        """;
+
+        while (true)
+        {
+            bookInfo = $"""
+        1. {book.Author} - Author
+        2. {book.Title} - Title
+        3. {book.Genre} - Genre
+        4. {book.Status} - Status
+        5. Save
+        """;
+
+            Console.WriteLine(bookInfo);
+            var userSelect = UserInputHandler.GetIntegerInput("Enter your choice (1-5): ");
+            switch (userSelect)
+            {
+                case 1:
+                    var author = UserInputHandler.GetStringInput("Enter author: ");
+                    book.Author = author;
+                    break;
+                case 2:
+                    var title = UserInputHandler.GetStringInput("Enter title: ");
+                    book.Title = title;
+                    break;
+                case 3:
+                    var genre = UserInputHandler.GetStringInput("Enter genre: ");
+                    book.Genre = genre;
+                    break;
+                case 4:
+                    var status = AskForStatus();
+                    book.Status = status;
+                    break;
+                case 5:
+                    return book;
+            }
+        }
     }
 
     private void ChangeStatus()
