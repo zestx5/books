@@ -1,11 +1,22 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using System.Linq.Expressions;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
+using Books.Models;
+using Books.Repositories;
+using Books.Services;
 
 namespace Books.UserInterface;
 
 public class MenuHandler
 {
-    public static void Start()
+    private readonly BookService _bookService;
+
+    public MenuHandler(IEntityRepository<Book> repository)
+    {
+        _bookService = new BookService(repository);
+    }
+
+    public void Start()
     {
         string menu = """
         =============== Menu ===============
@@ -22,10 +33,10 @@ public class MenuHandler
         Console.WriteLine();
 
         var userSelect = UserInputHandler.GetIntegerInput("Enter your choice (1-6): ");
-        Resolve(userSelect)();
+        ResolveMenu(userSelect)();
     }
 
-    private static Action Resolve(int input) => input switch
+    private Action ResolveMenu(int input) => input switch
     {
         1 => CreateBook,
         2 => DisplayAllBooks,
@@ -36,43 +47,59 @@ public class MenuHandler
         _ => InvalidOption
     };
 
-    private static void InvalidOption()
+    private void InvalidOption()
     {
         Console.WriteLine("Invalid input. Please enter a valid number.");
         Start();
     }
 
-    private static void DisplayAllBooks()
+    private void DisplayAllBooks()
+    {
+        var books = _bookService.DisplayAllBooks();
+        if (books.Equals("No books"))
+        {
+            Console.WriteLine(books);
+            AskExitApp();
+        }
+        Console.WriteLine(books);
+        AskExitApp();
+    }
+
+    private void AskExitApp()
+    {
+        var exit = UserInputHandler.GetYesNoInput("Exit app ?");
+        if (exit)
+        {
+            Exit();
+        }
+        Start();
+    }
+
+    private void EditBook()
     {
         Console.WriteLine("WIP");
         Start();
     }
 
-    private static void EditBook()
+    private void ChangeStatus()
     {
         Console.WriteLine("WIP");
         Start();
     }
 
-    private static void ChangeStatus()
+    private void DeleteBook()
     {
         Console.WriteLine("WIP");
         Start();
     }
 
-    private static void DeleteBook()
-    {
-        Console.WriteLine("WIP");
-        Start();
-    }
-
-    private static void Exit()
+    private void Exit()
     {
         Console.WriteLine("Exiting the application...");
         Environment.Exit(0);
     }
 
-    private static void CreateBook()
+    private void CreateBook()
     {
         Console.WriteLine("WIP");
         Start();
