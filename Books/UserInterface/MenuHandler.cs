@@ -159,8 +159,16 @@ public class MenuHandler
 
     private void DeleteBook()
     {
-        Console.WriteLine("WIP");
-        Start();
+        Console.WriteLine("Select book");
+        var id = UserInputHandler.GetIntegerInput("Enter book id: ");
+        var book = _bookService.GetById(id);
+        if (book != null)
+        {
+            _bookService.DeleteBook(id);
+            Start();
+        }
+        Console.WriteLine("No book");
+        AskExitApp(); ;
     }
 
     private void Exit()
